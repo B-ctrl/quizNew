@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Game</title>
+
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+<div class="container">
+  
+  <div id="rules">
+    <p>The quiz will contain 5-questions.</p>
+    <P>You have 75-seconds to answer 5-questions, but beware... 
+      if you answer incorrectly 20-seconds will be deducted from the time remaining.</P>
+    <p>The quiz will finish after you answer 5-questions or run out of time.</p>
+    <p>Your score will equal the time remaining when you finish the quiz.  </p>
+    <p>Can you beat the high score?</p>
+  </div>
+  <div id="questionContainer" class="hide">
+    <div id="question">Question 1</div>
+    <div id="answerButtons" class="btnGrid">
+      <button class="btn">Answer 1</button><br>
+      <button class="btn">Answer 2</button><br>
+      <button class="btn">Answer 3</button><br>
+      <button class="btn">Answer 4</button><br>
+    </div>
+  </div>
+  
+  <div>
+    <span id="score" class="score hide">
+      insert score here
+    </span>
+    <br>
+    <span id="timer" class="timer hide">
+      insert timer here
+    </span>
+  </div>
+
+  <div class="controls">
+      <button id="startButton" class="startButton btn">Start</button>
+      <button id="nextButton" class="nextButton btn hide">Next</button>
+  </div>
+
+
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
