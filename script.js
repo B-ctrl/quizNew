@@ -19,6 +19,14 @@ const questionEl = document.getElementById('question')
 const answerButtonsEL = document.getElementById('answerButtons')
 const Score1EL = document.getElementById('Score1')
 const Name1EL = document.getElementById('Name1')
+const Score2EL = document.getElementById('Score2')
+const Name2EL = document.getElementById('Name2')
+const Score3EL = document.getElementById('Score3')
+const Name3EL = document.getElementById('Name3')
+const Score4EL = document.getElementById('Score4')
+const Name4EL = document.getElementById('Name4')
+const Score5EL = document.getElementById('Score5')
+const Name5EL = document.getElementById('Name5')
 
 let timer=500
 var totalSeconds = timer
@@ -33,6 +41,11 @@ var sortedHighScoreList = [
   {"Score": 0, "Name": '-'},
 ]
 const maxHighScores = 5
+var a
+var b
+var c
+var d
+var e
 
 
 
@@ -41,12 +54,44 @@ viewLeaderboardButtonEL.addEventListener('click', viewLeaderboard)
 function viewLeaderboard(){
   scoreEL.classList.add('hide')
   viewLeaderboardEL.classList.remove('hide')
-  
-  sortedHighScoreList.map(Score =>{
-    console.log("${score.name}-${score.Score}");
-  });
+  a=sortedHighScoreList[0]
+  b=sortedHighScoreList[1]
+  c=sortedHighScoreList[2]
+  d=sortedHighScoreList[3]
+  e=sortedHighScoreList[4]
+  document.getElementById("Score1").innerHTML = "<h4>Score: " + a.Score + "</h4>"
+  document.getElementById("Name1").innerHTML = "<h4>Name: " + a.Name + "</h4><br><hr><br>"
+  document.getElementById("Score2").innerHTML = "<h4>Score: " + b.Score + "</h4>"
+  document.getElementById("Name2").innerHTML = "<h4>Name: " + b.Name + "</h4><br><hr><br>"
+  document.getElementById("Score3").innerHTML = "<h4>Score: " + c.Score + "</h4>"
+  document.getElementById("Name3").innerHTML = "<h4>Name: " + c.Name + "</h4><br><hr><br>"
+  document.getElementById("Score4").innerHTML = "<h4>Score: " + d.Score + "</h4>"
+  document.getElementById("Name4").innerHTML = "<h4>Name: " + d.Name + "</h4><br><hr><br>"
+  document.getElementById("Score5").innerHTML = "<h4>Score: " + e.Score + "</h4>"
+  document.getElementById("Name5").innerHTML = "<h4>Name: " + e.Name + "</h4><br><hr><br>"
 }
 
+resetLeaderboardButtonEL.addEventListener('click', resetLeaderboard)
+
+function resetLeaderboard(){
+  sortedHighScoreList = [
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+  ]
+  highScores = [
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+    {"Score": 0, "Name": '-'},
+  ]
+
+
+  viewLeaderboard()
+}
 
 
 
@@ -90,7 +135,7 @@ function startGame(){
   timeoutEl.classList.add('hide')
   scoreEL.classList.add('hide')
   totalSeconds = 75  
-  console.log(timer)
+ // console.log(timer)
   rulesContainerElement.classList.add('hide')
   questionContainerElement.classList.remove('hide')
   quizTimeLeftEl.classList.remove('hide')
@@ -155,9 +200,9 @@ function resetState(){
 
 function selectAnswer(e){
   const selectedButton = e.target
-  console.log(selectedButton)
+ // console.log(selectedButton)
   const correct = selectedButton.dataset.correct
-  console.log(correct)
+ // console.log(correct)
   if (correct !== 'true'){
     totalSeconds = totalSeconds - 20
     mainbodyEL.classList.remove('bodyright')
@@ -168,7 +213,7 @@ function selectAnswer(e){
     mainbodyEL.classList.add('bodyright')
   }
 
-  console.log("timer: " + totalSeconds)
+ // console.log("timer: " + totalSeconds)
 
   if(totalSeconds <= 0){
     mainbodyEL.classList.remove('bodyright')
@@ -179,7 +224,7 @@ function selectAnswer(e){
     scoreEL.classList.add('hide')
     finalScore = totalSeconds
     myStopFunction()
-    console.log('they ran out of time')
+    //console.log('they ran out of time')
     startButton.innerText = 'Restart Quiz!'
     startButton.classList.remove('hide')
   }
@@ -187,9 +232,9 @@ function selectAnswer(e){
   if (shuffledQuestions.length > currentQuestionIndex + 1){
     currentQuestionIndex++
     setNextQuestion()
-    console.log(shuffledQuestions.length)
-    console.log(currentQuestionIndex)
-    console.log(' total seconds in set question function: ' + totalSeconds)
+  //  console.log(shuffledQuestions.length)
+  //  console.log(currentQuestionIndex)
+  //  console.log(' total seconds in set question function: ' + totalSeconds)
   }
 
   else {
@@ -201,7 +246,7 @@ function selectAnswer(e){
       submitNameEL.classList.remove('hide')
       finalScore = totalSeconds
       myStopFunction()
-      console.log('Final score: ' + finalScore)
+    //  console.log('Final score: ' + finalScore)
       startButton.innerText = 'Restart Quiz!'
       startButton.classList.remove('hide')
     }
@@ -214,7 +259,7 @@ function selectAnswer(e){
       scoreEL.classList.add('hide')
       finalScore = totalSeconds
       myStopFunction()
-      console.log('they ran out of time')
+    //  console.log('they ran out of time')
       startButton.innerText = 'Restart Quiz!'
       startButton.classList.remove('hide')
     }
