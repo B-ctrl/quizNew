@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link href="styles.css" rel="stylesheet">
 </head>
-<body>
+<body id="mainbody" class="body">
 
 
 
@@ -25,13 +25,55 @@
     <p>Your score will equal the time remaining when you finish the quiz.  </p>
     <p>Can you beat the high score?</p>
   </div>
+
   <div id="score" class="score hide">
     <h2 id="scoreResult">0</h2>
-    <P>You finished the quiz.</P>
+    <P>Congratulations, you finished the quiz.</P>
     <p>Enter your name to join the leaderboard.</p>
-    <form><input type='text' name="Name" size="60" value="Name" padding="20px"></form><br>
+    <form><input type='text' id="Name" value="Name" class="name"></form><br>
     <button class="btn" id="submitName">Submit Name</button>
   </div>
+
+  <div id="leaderboard" class="leaderboard hide">
+    <div class="row">
+      <div class="col"><h3>1</h3></div>
+      <div class="col" id="Score1"><h3></h3></div>
+      <div class="col" id="Name1"><h3></h3></div>
+    </div>
+    <div class="row">
+      <div class="col"><h3>2</h3></div>
+      <div class="col" id="Score2"><h3></h3></div>
+      <div class="col" id="Name2"><h3></h3></div>
+    </div>
+    <div class="row">
+      <div class="col"><h3>3</h3></div>
+      <div class="col" id="Score3"><h3></h3></div>
+      <div class="col" id="Name3"><h3></h3></div>
+    </div>
+    <div class="row">
+      <div class="col"><h3>4</h3></div>
+      <div class="col" id="Score4"><h3></h3></div>
+      <div class="col" id="Name4"><h3></h3></div>
+    </div>
+    <div class="row">
+      <div class="col"><h3>5</h3></div>
+      <div class="col" id="Score5"><h3></h3></div>
+      <div class="col" id="Name5"><h3></h3></div>
+    </div>
+  </div>
+  <div>
+    <button class="btn hide" id="viewLeaderboard">View Leaderboard</button>
+  </div>
+  <div>
+    <button class="btn hide" id="resetLeaderboard">Reset Leaderboard</button>
+  </div>
+    
+    
+  <div id="submitContainer" class="hide">
+    <form><input type='text' id="Name" value="Name" class="name"></form><br>
+    <button class="btn" id="submitName">Submit Name</button>
+  </div>
+  
   <div id="timeout" class="timeout hide">
     <h2>Time's up!</h2>
     <P>You failed to finish the quiz on time.</P>
@@ -57,7 +99,6 @@
   <div class="controls">
       <button id="startButton" class="startButton btn">Start</button>
       <button id="nextButton" class="nextButton btn hide">Next</button>
-      <button id="resultsButton" class="resultsButton btn hide">Results</button>
   </div>
 
 

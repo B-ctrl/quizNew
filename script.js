@@ -1,6 +1,12 @@
 const startButton = document.getElementById('startButton')
 const nextButton = document.getElementById('nextButton')
 const resultsButton = document.getElementById('resultsButton')
+const submitNameEL = document.getElementById('submitName')
+const viewLeaderboardButtonEL = document.getElementById('viewLeaderboard')
+const resetLeaderboardButtonEL = document.getElementById('resetLeaderboard')
+const viewLeaderboardEL = document.getElementById('leaderboard')
+const NameEL = document.getElementById('Name')
+const mainbodyEL = document.getElementById('mainbody')
 const rulesContainerElement = document.getElementById ('rules')
 const quizTimeLeftEl = document.getElementById ('quizTimeLeft')
 const timeoutEl = document.getElementById ('timeout')
@@ -11,10 +17,35 @@ const bottomEL = document.getElementById ('bottom')
 let currentQuestionIndex, shuffledQuestions
 const questionEl = document.getElementById('question')
 const answerButtonsEL = document.getElementById('answerButtons')
+const Score1EL = document.getElementById('Score1')
+const Name1EL = document.getElementById('Name1')
+
 let timer=500
 var totalSeconds = timer
 var finalScore = 0
+var currentName = "Bob"
+var highScores = []
+var sortedHighScoreList = [
+  {"Score": 0, "Name": '-'},
+  {"Score": 0, "Name": '-'},
+  {"Score": 0, "Name": '-'},
+  {"Score": 0, "Name": '-'},
+  {"Score": 0, "Name": '-'},
+]
+const maxHighScores = 5
 
+
+
+viewLeaderboardButtonEL.addEventListener('click', viewLeaderboard)
+
+function viewLeaderboard(){
+  scoreEL.classList.add('hide')
+  viewLeaderboardEL.classList.remove('hide')
+  
+  sortedHighScoreList.map(Score =>{
+    console.log("${score.name}-${score.Score}");
+  });
+}
 
 
 
@@ -24,9 +55,37 @@ var finalScore = 0
 startButton.addEventListener('click', startGame)
 
 
+
+submitNameEL.addEventListener('click', recordScore)
+
+function recordScore(){
+ 
+  currentName = document.getElementById("Name").value
+  //console.log(currentName)
+  //console.log(totalSeconds)
+
+  highScores.push({"Score": totalSeconds, "Name": currentName}) 
+  sortedHighScoreList = highScores.sort ( (a,b) => b.Score - a.Score)  
+  sortedHighScoreList.splice(maxHighScores)
+
+  console.log(sortedHighScoreList)
+
+  submitNameEL.classList.add('hide')
+ // document.getElementById("Score1").innerHTML = sortedHighScoreList.
+  resetLeaderboardButtonEL.classList.remove('hide')
+  viewLeaderboardButtonEL.classList.remove('hide')
+
+}
+
+
 function startGame(){
   
   // console.log('started');
+  resetLeaderboardButtonEL.classList.add('hide')
+  viewLeaderboardButtonEL.classList.add('hide')
+  viewLeaderboardEL.classList.add('hide')
+  mainbodyEL.classList.remove('bodyright')
+  mainbodyEL.classList.remove('bodywrong')
   startButton.classList.add('hide')
   timeoutEl.classList.add('hide')
   scoreEL.classList.add('hide')
@@ -101,10 +160,19 @@ function selectAnswer(e){
   console.log(correct)
   if (correct !== 'true'){
     totalSeconds = totalSeconds - 20
+    mainbodyEL.classList.remove('bodyright')
+    mainbodyEL.classList.add('bodywrong')
   }
+  if (correct == 'true'){
+    mainbodyEL.classList.remove('bodywrong')
+    mainbodyEL.classList.add('bodyright')
+  }
+
   console.log("timer: " + totalSeconds)
 
-  if(totalSeconds < 0){
+  if(totalSeconds <= 0){
+    mainbodyEL.classList.remove('bodyright')
+    mainbodyEL.classList.add('bodywrong')
     quizTimeLeftEl.classList.add('hide')
     timeoutEl.classList.remove('hide')
     questionContainerElement.classList.add('hide')
@@ -125,11 +193,12 @@ function selectAnswer(e){
   }
 
   else {
-    if(totalSeconds >= 0){
+    if(totalSeconds > 0){
       document.getElementById("scoreResult").innerHTML = ('Your Score: ' + totalSeconds);
       quizTimeLeftEl.classList.add('hide')
       questionContainerElement.classList.add('hide')
       scoreEL.classList.remove('hide')
+      submitNameEL.classList.remove('hide')
       finalScore = totalSeconds
       myStopFunction()
       console.log('Final score: ' + finalScore)
@@ -138,6 +207,8 @@ function selectAnswer(e){
     }
     else{
       quizTimeLeftEl.classList.add('hide')
+      mainbodyEL.classList.remove('bodyright')
+      mainbodyEL.classList.add('bodywrong')
       timeoutEl.classList.remove('hide')
       questionContainerElement.classList.add('hide')
       scoreEL.classList.add('hide')
