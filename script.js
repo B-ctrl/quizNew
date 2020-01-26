@@ -5,6 +5,10 @@ const submitNameEL = document.getElementById('submitName')
 const viewLeaderboardButtonEL = document.getElementById('viewLeaderboard')
 const resetLeaderboardButtonEL = document.getElementById('resetLeaderboard')
 const viewLeaderboardEL = document.getElementById('leaderboard')
+const viewLeaderboardEL2 = document.getElementById('leaderboard2')
+const viewLeaderboardEL3 = document.getElementById('leaderboard3')
+const viewLeaderboardEL4 = document.getElementById('leaderboard4')
+const viewLeaderboardEL5 = document.getElementById('leaderboard5')
 const NameEL = document.getElementById('Name')
 const mainbodyEL = document.getElementById('mainbody')
 const rulesContainerElement = document.getElementById ('rules')
@@ -54,21 +58,26 @@ viewLeaderboardButtonEL.addEventListener('click', viewLeaderboard)
 function viewLeaderboard(){
   scoreEL.classList.add('hide')
   viewLeaderboardEL.classList.remove('hide')
+  viewLeaderboardEL2.classList.remove('hide')
+  viewLeaderboardEL3.classList.remove('hide')
+  viewLeaderboardEL4.classList.remove('hide')
+  viewLeaderboardEL5.classList.remove('hide')
+  viewLeaderboardButtonEL.classList.add('hide')
   a=sortedHighScoreList[0]
   b=sortedHighScoreList[1]
   c=sortedHighScoreList[2]
   d=sortedHighScoreList[3]
   e=sortedHighScoreList[4]
-  document.getElementById("Score1").innerHTML = "<h4>Score: " + a.Score + "</h4>"
-  document.getElementById("Name1").innerHTML = "<h4>Name: " + a.Name + "</h4><br><hr><br>"
-  document.getElementById("Score2").innerHTML = "<h4>Score: " + b.Score + "</h4>"
-  document.getElementById("Name2").innerHTML = "<h4>Name: " + b.Name + "</h4><br><hr><br>"
-  document.getElementById("Score3").innerHTML = "<h4>Score: " + c.Score + "</h4>"
-  document.getElementById("Name3").innerHTML = "<h4>Name: " + c.Name + "</h4><br><hr><br>"
-  document.getElementById("Score4").innerHTML = "<h4>Score: " + d.Score + "</h4>"
-  document.getElementById("Name4").innerHTML = "<h4>Name: " + d.Name + "</h4><br><hr><br>"
-  document.getElementById("Score5").innerHTML = "<h4>Score: " + e.Score + "</h4>"
-  document.getElementById("Name5").innerHTML = "<h4>Name: " + e.Name + "</h4><br><hr><br>"
+  document.getElementById("Score1").innerHTML = "<h4>" + a.Score + "</h4>"
+  document.getElementById("Name1").innerHTML = "<h4>" + a.Name + "</h4>"
+  document.getElementById("Score2").innerHTML = "<h4>" + b.Score + "</h4>"
+  document.getElementById("Name2").innerHTML = "<h4>" + b.Name + "</h4>"
+  document.getElementById("Score3").innerHTML = "<h4>" + c.Score + "</h4>"
+  document.getElementById("Name3").innerHTML = "<h4>" + c.Name + "</h4>"
+  document.getElementById("Score4").innerHTML = "<h4>" + d.Score + "</h4>"
+  document.getElementById("Name4").innerHTML = "<h4>" + d.Name + "</h4>"
+  document.getElementById("Score5").innerHTML = "<h4>" + e.Score + "</h4>"
+  document.getElementById("Name5").innerHTML = "<h4>" + e.Name + "</h4>"
 }
 
 resetLeaderboardButtonEL.addEventListener('click', resetLeaderboard)
@@ -89,7 +98,7 @@ function resetLeaderboard(){
     {"Score": 0, "Name": '-'},
   ]
 
-
+  resetLeaderboardButtonEL.classList.add('hide')
   viewLeaderboard()
 }
 
@@ -127,8 +136,12 @@ function startGame(){
   
   // console.log('started');
   resetLeaderboardButtonEL.classList.add('hide')
-  viewLeaderboardButtonEL.classList.add('hide')
   viewLeaderboardEL.classList.add('hide')
+  viewLeaderboardEL2.classList.add('hide')
+  viewLeaderboardEL3.classList.add('hide')
+  viewLeaderboardEL4.classList.add('hide')
+  viewLeaderboardEL5.classList.add('hide')
+  viewLeaderboardButtonEL.classList.add('hide')
   mainbodyEL.classList.remove('bodyright')
   mainbodyEL.classList.remove('bodywrong')
   startButton.classList.add('hide')
