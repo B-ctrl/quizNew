@@ -1,34 +1,71 @@
 const startButton = document.getElementById('startButton')
 const nextButton = document.getElementById('nextButton')
+const resultsButton = document.getElementById('resultsButton')
 const rulesContainerElement = document.getElementById ('rules')
-const timerContainerElement = document.getElementById ('timer')
+const quizTimeLeftEl = document.getElementById ('quizTimeLeft')
+const timeoutEl = document.getElementById ('timeout')
 const questionContainerElement = document.getElementById ('questionContainer')
 const scoreEL = document.getElementById ('score')
+const scoreResultEL = document.getElementById ('scoreResult')
 const bottomEL = document.getElementById ('bottom')
 let currentQuestionIndex, shuffledQuestions
 const questionEl = document.getElementById('question')
 const answerButtonsEL = document.getElementById('answerButtons')
-let timer=75
-let right=0
-let score=0
+let timer=500
+var totalSeconds = timer
+var finalScore = 0
+
+
+
+
+
 
 
 startButton.addEventListener('click', startGame)
 
 
 function startGame(){
+  
   // console.log('started');
   startButton.classList.add('hide')
-  
+  timeoutEl.classList.add('hide')
+  scoreEL.classList.add('hide')
+  totalSeconds = 75  
+  console.log(timer)
   rulesContainerElement.classList.add('hide')
   questionContainerElement.classList.remove('hide')
-  timerContainerElement.classList.remove('hide')
+  quizTimeLeftEl.classList.remove('hide')
   currentQuestionIndex = 0
   shuffledQuestions = questions.sort(() => Math.random() - .5)
+  update = setInterval("checkTime()", 1000)
+  checkTime()
  // console.log(shuffledQuestions)
   setNextQuestion()
 }
 
+/*
+totalSeconds = setInterval(myTimer ,1000);
+function myTimer() {
+  document.getElementById("quizTimeLeft").innerHTML = 'Time remaining: ' + totalSeconds;
+  totalSeconds--;
+}
+*/
+
+
+function checkTime(){  
+  document.getElementById("quizTimeLeft").innerHTML = 'Time remaining: ' + totalSeconds;
+  if (totalSeconds <=0){
+    myStopFunction()
+    //alert("time's up")
+  }
+  else{
+    totalSeconds-- 
+  }
+}
+
+function myStopFunction(){
+  clearInterval(update)
+}
 
 
 function setNextQuestion(){
@@ -44,12 +81,9 @@ function showQuestion(question){
     button.classList.add('btn')
       if (answer.correct){
         button.dataset.correct = answer.correct;
-
       }
-
     button.addEventListener('click', selectAnswer)
     answerButtonsEL.appendChild(button)
-
   })
 }
 
@@ -66,21 +100,53 @@ function selectAnswer(e){
   const correct = selectedButton.dataset.correct
   console.log(correct)
   if (correct !== 'true'){
-    timer = timer - 20
+    totalSeconds = totalSeconds - 20
   }
-  console.log("timer: " + timer)
-  // scoreEl.innerText = ("score: " + score)
-  // scoreEl.innerText = timer
+  console.log("timer: " + totalSeconds)
 
-  
+  if(totalSeconds < 0){
+    quizTimeLeftEl.classList.add('hide')
+    timeoutEl.classList.remove('hide')
+    questionContainerElement.classList.add('hide')
+    scoreEL.classList.add('hide')
+    finalScore = totalSeconds
+    myStopFunction()
+    console.log('they ran out of time')
+    startButton.innerText = 'Restart Quiz!'
+    startButton.classList.remove('hide')
+  }
 
   if (shuffledQuestions.length > currentQuestionIndex + 1){
     currentQuestionIndex++
     setNextQuestion()
+    console.log(shuffledQuestions.length)
+    console.log(currentQuestionIndex)
+    console.log(' total seconds in set question function: ' + totalSeconds)
   }
+
   else {
-    startButton.innerText = 'Restart'
-    startButton.classList.remove('hide')
+    if(totalSeconds >= 0){
+      document.getElementById("scoreResult").innerHTML = ('Your Score: ' + totalSeconds);
+      quizTimeLeftEl.classList.add('hide')
+      questionContainerElement.classList.add('hide')
+      scoreEL.classList.remove('hide')
+      finalScore = totalSeconds
+      myStopFunction()
+      console.log('Final score: ' + finalScore)
+      startButton.innerText = 'Restart Quiz!'
+      startButton.classList.remove('hide')
+    }
+    else{
+      quizTimeLeftEl.classList.add('hide')
+      timeoutEl.classList.remove('hide')
+      questionContainerElement.classList.add('hide')
+      scoreEL.classList.add('hide')
+      finalScore = totalSeconds
+      myStopFunction()
+      console.log('they ran out of time')
+      startButton.innerText = 'Restart Quiz!'
+      startButton.classList.remove('hide')
+    }
   }
   
 }
